@@ -19,6 +19,12 @@ namespace TechJobs.Controllers
         [Route("/search/results")]
         public IActionResult Results(string searchType, string searchTerm)
         {
+            //check if searchTerm is empty. If so, redirect to Search Index. Can't figure out how to pass an error message.
+            if (searchTerm == "" || searchTerm == null) 
+            {
+                return Redirect("/search");
+            }
+
             if (searchType == "all")
             {
                 List<Dictionary<string, string>> results = JobData.FindByValue(searchTerm);
